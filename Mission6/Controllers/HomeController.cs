@@ -26,12 +26,10 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Add(Application response)
     {
+        _context.Applications.Add(response);
+        _context.SaveChanges();
+        
         return View("Confirmation", response);
-    }
-
-    public IActionResult Collection()
-    {
-        return View();
     }
     
     public IActionResult About()

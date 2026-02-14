@@ -77,14 +77,11 @@
                         <!-- Edited and Lent To -->
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <div class="form-check mt-4">
-                                    <input asp-for="Edited" class="form-check-input" type="checkbox">
-                                    <label asp-for="Edited" class="form-check-label fw-normal">
-                                        Edited
-                                    </label>
-                                </div>
+                                <select asp-for="Edited">
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
-
                             <div class="col-md-6 mb-3">
                                 <label asp-for="Lent" class="form-label fw-normal">Lent To</label>
                                 <input asp-for="Lent" class="form-control" placeholder="Person's name">

@@ -21,8 +21,8 @@ public class Application
     
     [Required]
     public string Director { get; set; }
-    public bool Edited { get; set; }
-    public string Lent { get; set; }
-    public string Notes { get; set; }
+    public bool? Edited { get; set; }
+    public string? Lent { get; set; }
+    public string? Notes { get; set; }
 }
 
