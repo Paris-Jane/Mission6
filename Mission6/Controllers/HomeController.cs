@@ -6,14 +6,27 @@ namespace Mission6.Controllers;
 
 public class HomeController : Controller
 {
+    private MovieApplicationContext _context;
+    
+    public HomeController(MovieApplicationContext context)
+    {
+        _context = context;
+    }
     public IActionResult Index()
     {
         return View();
     }
 
+    [HttpGet]
     public IActionResult Add()
     {
         return View();
+    }
+    
+    [HttpPost]
+    public IActionResult Add(Application response)
+    {
+        return View("Confirmation", response);
     }
 
     public IActionResult Collection()
