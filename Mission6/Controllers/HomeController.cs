@@ -37,6 +37,15 @@ public class HomeController : Controller
         return View();
     }
     
+    public IActionResult Catalog()
+    {
+        var applications = _context.Applications
+            .OrderBy(x => x.Title)
+            .ToList();
+
+        return View(applications);
+    }
+    
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
