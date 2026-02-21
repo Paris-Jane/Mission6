@@ -2,7 +2,7 @@
     ViewData["Title"] = "Catalog";
 }
 
-@model List<Application>
+@model List<Movie>
 
 <style>
     body {
@@ -10,10 +10,10 @@
     }
 </style>
 
-            <div class="text-center mb-4">
-                <h1 class="display-5 fw-light">Add a Movie</h1>
-                <p class="text-muted">Add to Hilton's collection</p>
-            </div>
+<div class="text-center mb-4">
+    <h1 class="display-5 fw-light">Add a Movie</h1>
+    <p class="text-muted">Add to Hilton's collection</p>
+</div>
 
 <table class="table table-bordered">
     <thead class="fw-bold">
@@ -25,25 +25,27 @@
             <th>Director</th>
             <th>Edited</th>
             <th>Lent</th>
+            <th>Copied To Plex</th>
             <th>Notes</th> 
         </tr>
     </thead>
     
+    
+    <tbody>
     @foreach (var a in Model)
     {
-        <tbody>
-            <tr>
-                <td>@a.Title</td>
-                <td>@a.Category</td>
-                <td>@a.Year</td>
-                <td>@a.Rating</td>
-                <td>@a.Director</td>
-                <td>@a.Edited</td>
-                <td>@a.Lent</td>
-                <td>@a.Notes</td>
-            </tr>
-        </tbody>  
+        <tr>
+            <td>@(a.Title)</td>
+            <td>@(a.Category?.CategoryName ?? "")</td>            <td>@(a.Year)</td>
+            <td>@(a.Rating ?? "")</td>
+            <td>@(a.Director ?? "")</td>
+            <td>@(a.Edited.HasValue ? (a.Edited.Value ? "Yes" : "No") : "")</td>
+            <td>@(a.LentTo ?? "")</td>
+            <td>@(a.CopiedToPlex.HasValue ? (a.CopiedToPlex.Value ? "Yes" : "No") : "")</td>
+            <td>@(a.Notes ?? "")</td>
+        </tr>
     }
+    </tbody>  
     
 </table>
 

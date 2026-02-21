@@ -2,7 +2,7 @@
     ViewData["Title"] = "Add Movie";
 }
 
-@model Application
+@model Movie
 
 <style>
     body {
@@ -55,8 +55,8 @@
 
                         <!-- Category (Full Width) -->
                         <div class="mb-3">
-                            <label asp-for="Category" class="form-label fw-normal">Category *</label>
-                            <select asp-for="Category" class="form-select" required>
+                            <label asp-for="CategoryID" class="form-label fw-normal">Category *</label>
+                            <select asp-for="CategoryID" class="form-select" required>
                                 <option value="">Select category...</option>
                                 <option value="Action/Adventure">Action/Adventure</option>
                                 <option value="Comedy">Comedy</option>
@@ -78,14 +78,14 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <select asp-for="Edited">
-                                    <label asp-for="Lent" class="form-label fw-normal">Edited</label>
+                                    <label asp-for="LentTo" class="form-label fw-normal">Edited</label>
                                     <option value="true">Yes</option>
                                     <option value="false">No</option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label asp-for="Lent" class="form-label fw-normal">Lent To</label>
-                                <input asp-for="Lent" class="form-control" placeholder="Person's name">
+                                <label asp-for="LentTo" class="form-label fw-normal">Lent To</label>
+                                <input asp-for="LentTo" class="form-control" placeholder="Person's name">
                             </div>
                         </div>
 

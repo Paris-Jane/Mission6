@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mission6.Models;
 
 namespace Mission6.Controllers;
@@ -24,9 +25,9 @@ public class HomeController : Controller
     }
     
     [HttpPost]
-    public IActionResult Add(Application response)
+    public IActionResult Add(Movie response)
     {
-        _context.Applications.Add(response);
+        _context.Movies.Add(response);
         _context.SaveChanges();
         
         return View("Confirmation", response);
@@ -39,7 +40,8 @@ public class HomeController : Controller
     
     public IActionResult Catalog()
     {
-        var applications = _context.Applications
+        var applications = _context.Movies
+            .Include(m => m.Category)
             .OrderBy(x => x.Title)
             .ToList();
 
