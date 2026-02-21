@@ -4,48 +4,48 @@
 
 @model List<Movie>
 
-<style>
-    body {
-        font-family: 'Inter', sans-serif;
-    }
-</style>
+<div class="container-fluid py-4">
+    <div class="text-center mb-4">
+        <h1 class="display-5 fw-light">Movie Catalog</h1>
+        <p class="text-muted">Hilton's collection</p>
+    </div>
 
-<div class="text-center mb-4">
-    <h1 class="display-5 fw-light">Add a Movie</h1>
-    <p class="text-muted">Add to Hilton's collection</p>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Year</th>
+                    <th>Rating</th>
+                    <th>Director</th>
+                    <th>Edited</th>
+                    <th>Lent To</th>
+                    <th>On Plex</th>
+                    <th>Notes</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var a in Model)
+                {
+                    <tr>
+                        <td class="fw-medium">@a.Title</td>
+                        <td>@(a.Category?.CategoryName ?? "")</td>
+                        <td>@a.Year</td>
+                        <td>@(a.Rating ?? "")</td>
+                        <td>@(a.Director ?? "")</td>
+                        <td>@(a.Edited.HasValue ? (a.Edited.Value ? "Yes" : "No") : "")</td>
+                        <td>@(a.LentTo ?? "")</td>
+                        <td>@(a.CopiedToPlex.HasValue ? (a.CopiedToPlex.Value ? "Yes" : "No") : "")</td>
+                        <td><small class="text-muted">@(a.Notes ?? "")</small></td>
+                        <td class="text-end text-nowrap">
+                            <a asp-controller="Home" asp-action="Edit" asp-route-id="@a.MovieId" class="btn btn-sm btn-outline-secondary me-1">Edit</a>
+                            <a asp-controller="Home" asp-action="Delete" asp-route-id="@a.MovieId" class="btn btn-sm btn-outline-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
-
-<table class="table table-bordered">
-    <thead class="fw-bold">
-        <tr>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Year</th>
-            <th>Rating</th>
-            <th>Director</th>
-            <th>Edited</th>
-            <th>Lent</th>
-            <th>Copied To Plex</th>
-            <th>Notes</th> 
-        </tr>
-    </thead>
-    
-    
-    <tbody>
-    @foreach (var a in Model)
-    {
-        <tr>
-            <td>@(a.Title)</td>
-            <td>@(a.Category?.CategoryName ?? "")</td>            <td>@(a.Year)</td>
-            <td>@(a.Rating ?? "")</td>
-            <td>@(a.Director ?? "")</td>
-            <td>@(a.Edited.HasValue ? (a.Edited.Value ? "Yes" : "No") : "")</td>
-            <td>@(a.LentTo ?? "")</td>
-            <td>@(a.CopiedToPlex.HasValue ? (a.CopiedToPlex.Value ? "Yes" : "No") : "")</td>
-            <td>@(a.Notes ?? "")</td>
-        </tr>
-    }
-    </tbody>  
-    
-</table>
-

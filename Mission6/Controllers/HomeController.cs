@@ -21,17 +21,27 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Add()
     {
-        return View();
+        ViewBag.Category = _context.Categories.ToList();
+        return View("Add", new Movie());
     }
-    
+
     [HttpPost]
     public IActionResult Add(Movie response)
     {
-        _context.Movies.Add(response);
-        _context.SaveChanges();
-        
-        return View("Confirmation", response);
+        if (ModelState.IsValid)
+        {
+            _context.Movies.Add(response);
+            _context.SaveChanges();
+
+            return View("Confirmation", response);
+        }
+        else
+        {
+            ViewBag.Category = _context.Categories.ToList();
+            return View("Add", response);
+        }
     }
+
     
     public IActionResult About()
     {
@@ -46,6 +56,43 @@ public class HomeController : Controller
             .ToList();
 
         return View(applications);
+    }
+
+    [HttpGet]
+    public IActionResult Edit(int id)
+    {
+        var recordToEdit = _context.Movies 
+            .Single(m => m.MovieId == id);
+        
+        ViewBag.Category = _context.Categories.ToList();
+        
+        return View("Add", recordToEdit);
+    }
+
+    [HttpPost]
+    public IActionResult Edit(Movie recordToEdit)
+    {
+        _context.Update(recordToEdit);
+        _context.SaveChanges();
+        
+        return RedirectToAction("Catalog");
+    }
+    
+    [HttpGet]
+    public IActionResult Delete(int id)
+    {
+        var recordToDelete = _context.Movies
+            .Single(m => m.MovieId == id);
+        return View(recordToDelete);
+    }
+    
+    [HttpPost]
+    public IActionResult Delete(Movie movie)
+    {
+        _context.Movies.Remove(movie);
+        _context.SaveChanges();
+        
+        return RedirectToAction("Catalog");
     }
     
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
